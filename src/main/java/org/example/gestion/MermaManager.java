@@ -1,4 +1,4 @@
-package org.example;
+package org.example.gestion;
 
 public class MermaManager {
     public static void generarReporte(){

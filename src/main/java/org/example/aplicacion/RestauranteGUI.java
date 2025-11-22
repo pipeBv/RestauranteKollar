@@ -1,4 +1,11 @@
-package org.example;
+package org.example.aplicacion;
+
+import org.example.entidades.Gerente;
+import org.example.entidades.Ingrediente;
+import org.example.entidades.Plato;
+import org.example.entidades.Usuario;
+import org.example.gestion.InventarioManager;
+import org.example.gestion.PlatoManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +23,7 @@ public class RestauranteGUI extends JFrame {
 
     private JTextField txtUsuario;
     private JPasswordField txtPass;
-    private Usuario gerente = new Usuario("Benjamin", "1234");
+    private Gerente gerente = new Gerente(1,"Benjamin", "1234");
 
     public RestauranteGUI() {
 
@@ -65,8 +72,7 @@ public class RestauranteGUI extends JFrame {
     private void validarLogin() {
         String usuarioIngresado = txtUsuario.getText();
         String passIngresado = new String(txtPass.getPassword());
-        if (usuarioIngresado.equals(gerente.getNombreUsuario()) &&
-                passIngresado.equals(gerente.getContraseña())) {
+        if (usuarioIngresado.equals(gerente.getNombre()) && passIngresado.equals(gerente.getContraseña())) {
             JOptionPane.showMessageDialog(this, "Bienvenido: " + usuarioIngresado);
             cargarInterfazPrincipal();
         } else {
@@ -75,7 +81,7 @@ public class RestauranteGUI extends JFrame {
     }
 
     private void cargarInterfazPrincipal() {
-        setTitle("Gestión de Restaurante - Panel Principal");
+        setTitle("Restaurante Kollar");
         setSize(900, 600);
         setLocationRelativeTo(null);
 
@@ -83,37 +89,28 @@ public class RestauranteGUI extends JFrame {
 
         tabbedPane.addTab("Adminstrar Inventario", crearPanelInventario());
         tabbedPane.addTab("Administrar Platos", crearPanelPlatos());
-        tabbedPane.addTab("Hacer Pedido", crearPanelPedidos());
-        tabbedPane.addTab("Ver reporte", crearPanelReporte());
         tabbedPane.addTab("Administrar Empleados", crearPanelEmpleados());
+        tabbedPane.addTab("Ver reporte", crearPanelReporte());
+        tabbedPane.addTab("Hacer Pedido", crearPanelPedidos());
+
 
         setContentPane(tabbedPane);
         revalidate();
         repaint();
     }
-
-
     private JPanel crearPanelInventario() {
         JPanel panel = new JPanel(new BorderLayout());
-
-        JTabbedPane tabbedPane = new JTabbedPane();
-
-
-        tabbedPane.addTab("Adminstrar Inventario", crearPanelInventario());
-
-
-        tabbedPane.addTab("Administrar Platos", crearPanelPlatos());
-
-        tabbedPane.addTab("Hacer Pedido", crearPanelPedidos());
-
-        tabbedPane.addTab("Ver reporte",crearPanelReporte());
-
-        tabbedPane.addTab("Administrar Empleados",crearPanelEmpleados());
-
-        add(tabbedPane);
+        String[] col = {"ID", "Nombre", "Stock"};
+        modeloTablaInventario = new DefaultTableModel(col, 0);
+        JTable tabla = new JTable(modeloTablaInventario);
+        panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
+        JPanel panelBotones = new JPanel();
+        JTextField txtNombre = new JTextField(10);
+        JTextField txtStock = new JTextField(5);
+        JButton btnAgregar = new JButton("Agregar Item");
+        JButton btnEliminar = new JButton("Eliminar Seleccionado");
         return panel;
     }
-
 
     private JPanel crearPanelPlatos() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -178,12 +175,9 @@ public class RestauranteGUI extends JFrame {
 
     private void actualizarTablaInventario() {
         modeloTablaInventario.setRowCount(0);
-        ArrayList<ItemInventario> lista = inventarioManager.obtenerItems();
-        for (ItemInventario item : lista) {
+        ArrayList<Ingrediente> lista = inventarioManager.obtenerItems();
+        for (Ingrediente item : lista) {
             modeloTablaInventario.addRow(new Object[]{
-                    item.getId().toHexString(),
-                    item.getNombre(),
-                    item.getStock()
             });
         }
     }

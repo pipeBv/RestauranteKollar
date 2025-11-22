@@ -1,9 +1,9 @@
-package org.example;
+package org.example.entidades;
 
 public class Presupuesto {
-    double presupuesto;
-    double perdidas;
-    double ganancias;
+    private double presupuesto;
+    private double perdidas;
+    private double ganancias;
 
     public Presupuesto(double presupuesto, double perdidas, double ganancias) {
         this.presupuesto = presupuesto;
@@ -13,17 +13,20 @@ public class Presupuesto {
     public double getPresupuesto() {
         return presupuesto;
     }
+    public void setPresupuesto(double presupuesto) {
+        this.presupuesto = presupuesto;
+    }
     public double getGanancias() {
         return ganancias;
+    }
+    public void setGanancias(double ganancias) {
+        this.ganancias = ganancias;
     }
    public double getPerdidas() {
         return perdidas;
    }
-    public double calcularResultado() {
-        presupuesto =-perdidas;
-        System.out.println(presupuesto=-perdidas);
-        presupuesto =+ganancias;
-        System.out.println(presupuesto+=ganancias);
-        return presupuesto;
-    }
+   public void setPerdidas(double perdidas) {
+        this.perdidas = perdidas;
+   }
+
 }
