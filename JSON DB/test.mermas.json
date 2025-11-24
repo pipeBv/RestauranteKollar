@@ -1,0 +1,180 @@
+[{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a2"
+  },
+  "nombre": "Yogurt Natural",
+  "cantidad": 5,
+  "unidadMedida": "Unidades",
+  "causa": "Vencimiento (No rotación FIFO)",
+  "fecha": {
+    "$date": "2024-03-10T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a3"
+  },
+  "nombre": "Frutillas",
+  "cantidad": 2,
+  "unidadMedida": "Kg",
+  "causa": "Hongos por exceso de humedad",
+  "fecha": {
+    "$date": "2024-03-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a4"
+  },
+  "nombre": "Helado de Vainilla",
+  "cantidad": 1,
+  "unidadMedida": "Litro",
+  "causa": "Corte cadena de frío (Falla congelador)",
+  "fecha": {
+    "$date": "2024-03-15T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a5"
+  },
+  "nombre": "Lomo Vetado",
+  "cantidad": 0.5,
+  "unidadMedida": "Kg",
+  "causa": "Error de cocción (Carne quemada)",
+  "fecha": {
+    "$date": "2024-03-18T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a6"
+  },
+  "nombre": "Arroz Grado 1",
+  "cantidad": 1,
+  "unidadMedida": "Kg",
+  "causa": "Error en receta (Exceso de sal)",
+  "fecha": {
+    "$date": "2024-03-19T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a7"
+  },
+  "nombre": "Lechuga Hidropónica",
+  "cantidad": 2,
+  "unidadMedida": "Unidades",
+  "causa": "Contaminación cruzada (Contacto con carne cruda)",
+  "fecha": {
+    "$date": "2024-03-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a8"
+  },
+  "nombre": "Aceite de Oliva",
+  "cantidad": 1,
+  "unidadMedida": "Litro",
+  "causa": "Rotura de envase (Caída en bodega)",
+  "fecha": {
+    "$date": "2024-03-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25a9"
+  },
+  "nombre": "Huevos Extra Grandes",
+  "cantidad": 6,
+  "unidadMedida": "Unidades",
+  "causa": "Manipulación incorrecta (Aplastamiento)",
+  "fecha": {
+    "$date": "2024-03-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25aa"
+  },
+  "nombre": "Copas de Vino",
+  "cantidad": 3,
+  "unidadMedida": "Unidades",
+  "causa": "Rotura en lavado",
+  "fecha": {
+    "$date": "2024-03-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25ab"
+  },
+  "nombre": "Plato: Spaghetti Carbonara",
+  "cantidad": 1,
+  "unidadMedida": "Unidad",
+  "causa": "Error de comanda (Mesero digitó mal)",
+  "fecha": {
+    "$date": "2024-03-23T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25ac"
+  },
+  "nombre": "Plato: Salmón a la Mantequilla",
+  "cantidad": 1,
+  "unidadMedida": "Unidad",
+  "causa": "Devolución cliente (Plato llegó frío)",
+  "fecha": {
+    "$date": "2024-03-23T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25ad"
+  },
+  "nombre": "Plato: Ensalada César",
+  "cantidad": 1,
+  "unidadMedida": "Unidad",
+  "causa": "Caída de bandeja (Accidente mesero)",
+  "fecha": {
+    "$date": "2024-03-24T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25ae"
+  },
+  "nombre": "Palta Hass",
+  "cantidad": 5,
+  "unidadMedida": "Kg",
+  "causa": "Mala calidad de origen (Negras por dentro)",
+  "fecha": {
+    "$date": "2024-03-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25af"
+  },
+  "nombre": "Vino Tinto Cabernet",
+  "cantidad": 1,
+  "unidadMedida": "Botella",
+  "causa": "Corcho defectuoso (Vino picado)",
+  "fecha": {
+    "$date": "2024-03-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692127b60533e4f0de3f25b0"
+  },
+  "nombre": "Filete de Res",
+  "cantidad": 1,
+  "unidadMedida": "Kg",
+  "causa": "Diferencia de Inventario (Posible hurto)",
+  "fecha": {
+    "$date": "2024-03-26T00:00:00.000Z"
+  }
+}]

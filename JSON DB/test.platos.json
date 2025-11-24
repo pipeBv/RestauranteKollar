@@ -1,0 +1,478 @@
+[{
+  "_id": {
+    "$oid": "692127460533e4f0de3f258f"
+  },
+  "nombre": "Hamburguesa Kollar",
+  "precio": 9500,
+  "descripcion": "Hamburguesa de la casa con tocino, queso cheddar y salsa especial",
+  "listaIngredientes": [
+    {
+      "nombre": "Pan de Hamburguesa",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Carne Molida Premium",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Tocino Ahumado",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Queso Cheddar",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Tomate Limachino",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2590"
+  },
+  "nombre": "Hamburguesa Italiana",
+  "precio": 8900,
+  "descripcion": "Clásica con palta, tomate y mayonesa casera",
+  "listaIngredientes": [
+    {
+      "nombre": "Pan de Hamburguesa",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Carne Molida Premium",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Palta Hass",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Tomate Limachino",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2591"
+  },
+  "nombre": "Barros Luco",
+  "precio": 7500,
+  "descripcion": "Sándwich de carne y queso fundido en pan hallulla",
+  "listaIngredientes": [
+    {
+      "nombre": "Pan Hallulla",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Lomo Vetado",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Queso Mozzarella",
+      "cantidad": 2
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2592"
+  },
+  "nombre": "Pizza Pepperoni",
+  "precio": 11500,
+  "descripcion": "Masa a la piedra con doble pepperoni (usamos chorizo en receta)",
+  "listaIngredientes": [
+    {
+      "nombre": "Harina Sin Polvos",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Salsa de Tomate",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Queso Mozzarella",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Chorizo",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2593"
+  },
+  "nombre": "Pizza Vegetariana",
+  "precio": 12000,
+  "descripcion": "Mix de vegetales de la estación",
+  "listaIngredientes": [
+    {
+      "nombre": "Harina Sin Polvos",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Salsa de Tomate",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Queso Mozzarella",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Pimiento Rojo",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Champiñones",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Rúcula",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2594"
+  },
+  "nombre": "Lomo a lo Pobre",
+  "precio": 14500,
+  "descripcion": "Bistec grande con papas fritas, cebolla y huevo frito",
+  "listaIngredientes": [
+    {
+      "nombre": "Lomo Vetado",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Papa",
+      "cantidad": 4
+    },
+    {
+      "nombre": "Cebolla Morada",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Huevos Extra Grandes",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Aceite Maravilla",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2595"
+  },
+  "nombre": "Pollo al Jugo",
+  "precio": 8500,
+  "descripcion": "Pollo cocinado lento con arroz graneado",
+  "listaIngredientes": [
+    {
+      "nombre": "Trutro de Pollo",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Arroz Grado 1",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Zanahoria",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Cebolla Morada",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2596"
+  },
+  "nombre": "Costillar BBQ",
+  "precio": 15900,
+  "descripcion": "Costillar de cerdo al horno con papas rústicas",
+  "listaIngredientes": [
+    {
+      "nombre": "Costillar de Cerdo",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Papa",
+      "cantidad": 3
+    },
+    {
+      "nombre": "Miel",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2597"
+  },
+  "nombre": "Salmón a la Mantequilla",
+  "precio": 16500,
+  "descripcion": "Filete de salmón sellado con puré rústico",
+  "listaIngredientes": [
+    {
+      "nombre": "Salmón Fresco",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Papa",
+      "cantidad": 3
+    },
+    {
+      "nombre": "Mantequilla Sin Sal",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Limón Sutil",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2598"
+  },
+  "nombre": "Reineta Frita",
+  "precio": 9900,
+  "descripcion": "Reineta en batido crocante con ensalada chilena",
+  "listaIngredientes": [
+    {
+      "nombre": "Reineta",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Harina Sin Polvos",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Aceite Maravilla",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Tomate Limachino",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Cebolla Morada",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f2599"
+  },
+  "nombre": "Spaghetti Carbonara",
+  "precio": 10900,
+  "descripcion": "Salsa original con huevo, queso y tocino",
+  "listaIngredientes": [
+    {
+      "nombre": "Spaghetti N5",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Tocino Ahumado",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Huevos Extra Grandes",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Queso Parmesano",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Pimienta Negra",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f259a"
+  },
+  "nombre": "Fettuccine Alfredo",
+  "precio": 10500,
+  "descripcion": "Salsa blanca cremosa con jamón",
+  "listaIngredientes": [
+    {
+      "nombre": "Fettuccine",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Crema de Leche",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Jamón Pierna",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Queso Parmesano",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f259b"
+  },
+  "nombre": "Spaghetti Bolognesa",
+  "precio": 9900,
+  "descripcion": "Salsa de tomate con carne molida",
+  "listaIngredientes": [
+    {
+      "nombre": "Spaghetti N5",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Salsa de Tomate",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Carne Molida Premium",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Laurel",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f259c"
+  },
+  "nombre": "Ensalada César",
+  "precio": 7900,
+  "descripcion": "Lechuga, pollo, crutones y queso parmesano",
+  "listaIngredientes": [
+    {
+      "nombre": "Lechuga Hidropónica",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Pechuga de Pollo",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Queso Parmesano",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Pan Hallulla",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f259d"
+  },
+  "nombre": "Ceviche de Salmón",
+  "precio": 12500,
+  "descripcion": "Salmón en cubos marinado en limón",
+  "listaIngredientes": [
+    {
+      "nombre": "Salmón Fresco",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Limón Sutil",
+      "cantidad": 3
+    },
+    {
+      "nombre": "Cebolla Morada",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Cilantro",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f259e"
+  },
+  "nombre": "Papas Supremas",
+  "precio": 8500,
+  "descripcion": "Papas fritas con queso fundido y tocino",
+  "listaIngredientes": [
+    {
+      "nombre": "Papa",
+      "cantidad": 5
+    },
+    {
+      "nombre": "Queso Cheddar",
+      "cantidad": 2
+    },
+    {
+      "nombre": "Tocino Ahumado",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Aceite Maravilla",
+      "cantidad": 2
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f259f"
+  },
+  "nombre": "Copa de Helado",
+  "precio": 3500,
+  "descripcion": "Helado de vainilla con salsa (ingredientes simulados)",
+  "listaIngredientes": [
+    {
+      "nombre": "Crema de Leche",
+      "cantidad": 1
+    },
+    {
+      "nombre": "Azúcar",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f25a0"
+  },
+  "nombre": "Coca Cola",
+  "precio": 2000,
+  "descripcion": "Lata fría de 350cc",
+  "listaIngredientes": [
+    {
+      "nombre": "Coca Cola Original",
+      "cantidad": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "692127460533e4f0de3f25a1"
+  },
+  "nombre": "Vino de la Casa",
+  "precio": 15000,
+  "descripcion": "Botella de Cabernet Sauvignon",
+  "listaIngredientes": [
+    {
+      "nombre": "Vino Tinto Cabernet",
+      "cantidad": 1
+    }
+  ]
+}]

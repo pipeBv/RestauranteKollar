@@ -1,0 +1,576 @@
+[{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2552"
+  },
+  "nombre": "Tomate Limachino",
+  "categoria": "Verduras",
+  "stock": 200,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-11-27T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2553"
+  },
+  "nombre": "Cebolla Morada",
+  "categoria": "Verduras",
+  "stock": 150,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-12-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2554"
+  },
+  "nombre": "Lechuga Hidropónica",
+  "categoria": "Verduras",
+  "stock": 80,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2555"
+  },
+  "nombre": "Papa",
+  "categoria": "Verduras",
+  "stock": 500,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-02-19T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2556"
+  },
+  "nombre": "Zanahoria",
+  "categoria": "Verduras",
+  "stock": 100,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-12-11T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2557"
+  },
+  "nombre": "Ajo",
+  "categoria": "Verduras",
+  "stock": 300,
+  "unidadMedida": "Dientes",
+  "caducidad": {
+    "$date": "2026-05-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2558"
+  },
+  "nombre": "Pimiento Rojo",
+  "categoria": "Verduras",
+  "stock": 60,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-11-29T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2559"
+  },
+  "nombre": "Champiñones",
+  "categoria": "Verduras",
+  "stock": 90,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f255a"
+  },
+  "nombre": "Palta Hass",
+  "categoria": "Verduras",
+  "stock": 120,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-11-26T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f255b"
+  },
+  "nombre": "Limón Sutil",
+  "categoria": "Verduras",
+  "stock": 200,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-12-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f255c"
+  },
+  "nombre": "Cilantro",
+  "categoria": "Verduras",
+  "stock": 50,
+  "unidadMedida": "Mazos",
+  "caducidad": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f255d"
+  },
+  "nombre": "Albahaca",
+  "categoria": "Verduras",
+  "stock": 40,
+  "unidadMedida": "Mazos",
+  "caducidad": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f255e"
+  },
+  "nombre": "Rúcula",
+  "categoria": "Verduras",
+  "stock": 30,
+  "unidadMedida": "Bolsas",
+  "caducidad": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f255f"
+  },
+  "nombre": "Zapallo Italiano",
+  "categoria": "Verduras",
+  "stock": 40,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-12-06T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2560"
+  },
+  "nombre": "Lomo Vetado",
+  "categoria": "Carnes",
+  "stock": 80,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-26T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2561"
+  },
+  "nombre": "Carne Molida Premium",
+  "categoria": "Carnes",
+  "stock": 60,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2562"
+  },
+  "nombre": "Pechuga de Pollo",
+  "categoria": "Carnes",
+  "stock": 100,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-27T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2563"
+  },
+  "nombre": "Trutro de Pollo",
+  "categoria": "Carnes",
+  "stock": 80,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-27T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2564"
+  },
+  "nombre": "Costillar de Cerdo",
+  "categoria": "Carnes",
+  "stock": 50,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-28T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2565"
+  },
+  "nombre": "Tocino Ahumado",
+  "categoria": "Carnes",
+  "stock": 40,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-01-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2566"
+  },
+  "nombre": "Jamón Pierna",
+  "categoria": "Carnes",
+  "stock": 30,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-12-06T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2567"
+  },
+  "nombre": "Salmón Fresco",
+  "categoria": "Pescados",
+  "stock": 40,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2568"
+  },
+  "nombre": "Reineta",
+  "categoria": "Pescados",
+  "stock": 50,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2569"
+  },
+  "nombre": "Camarones Ecuatorianos",
+  "categoria": "Pescados",
+  "stock": 60,
+  "unidadMedida": "Bolsas",
+  "caducidad": {
+    "$date": "2026-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f256a"
+  },
+  "nombre": "Huevos Extra Grandes",
+  "categoria": "Lácteos",
+  "stock": 600,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-12-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f256b"
+  },
+  "nombre": "Queso Mozzarella",
+  "categoria": "Lácteos",
+  "stock": 80,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-01-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f256c"
+  },
+  "nombre": "Queso Cheddar",
+  "categoria": "Lácteos",
+  "stock": 60,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-01-20T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f256d"
+  },
+  "nombre": "Queso Parmesano",
+  "categoria": "Lácteos",
+  "stock": 40,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-02-19T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f256e"
+  },
+  "nombre": "Queso Azul",
+  "categoria": "Lácteos",
+  "stock": 20,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-01-05T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f256f"
+  },
+  "nombre": "Crema de Leche",
+  "categoria": "Lácteos",
+  "stock": 100,
+  "unidadMedida": "Litros",
+  "caducidad": {
+    "$date": "2025-12-06T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2570"
+  },
+  "nombre": "Mantequilla Sin Sal",
+  "categoria": "Lácteos",
+  "stock": 100,
+  "unidadMedida": "Panes",
+  "caducidad": {
+    "$date": "2026-02-19T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2571"
+  },
+  "nombre": "Leche Entera",
+  "categoria": "Lácteos",
+  "stock": 150,
+  "unidadMedida": "Litros",
+  "caducidad": {
+    "$date": "2025-12-01T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2572"
+  },
+  "nombre": "Harina Sin Polvos",
+  "categoria": "Despensa",
+  "stock": 300,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2026-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2573"
+  },
+  "nombre": "Arroz Grado 1",
+  "categoria": "Despensa",
+  "stock": 250,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2027-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2574"
+  },
+  "nombre": "Spaghetti N5",
+  "categoria": "Despensa",
+  "stock": 150,
+  "unidadMedida": "Paquetes",
+  "caducidad": {
+    "$date": "2027-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2575"
+  },
+  "nombre": "Fettuccine",
+  "categoria": "Despensa",
+  "stock": 100,
+  "unidadMedida": "Paquetes",
+  "caducidad": {
+    "$date": "2027-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2576"
+  },
+  "nombre": "Salsa de Tomate",
+  "categoria": "Despensa",
+  "stock": 200,
+  "unidadMedida": "Cajas",
+  "caducidad": {
+    "$date": "2026-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2577"
+  },
+  "nombre": "Aceite de Oliva",
+  "categoria": "Despensa",
+  "stock": 80,
+  "unidadMedida": "Litros",
+  "caducidad": {
+    "$date": "2026-05-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2578"
+  },
+  "nombre": "Aceite Maravilla",
+  "categoria": "Despensa",
+  "stock": 150,
+  "unidadMedida": "Litros",
+  "caducidad": {
+    "$date": "2026-05-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2579"
+  },
+  "nombre": "Sal",
+  "categoria": "Despensa",
+  "stock": 100,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2030-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f257a"
+  },
+  "nombre": "Pimienta Negra",
+  "categoria": "Despensa",
+  "stock": 50,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2030-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f257b"
+  },
+  "nombre": "Azúcar",
+  "categoria": "Despensa",
+  "stock": 100,
+  "unidadMedida": "Kg",
+  "caducidad": {
+    "$date": "2028-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f257c"
+  },
+  "nombre": "Pan de Hamburguesa",
+  "categoria": "Panadería",
+  "stock": 200,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f257d"
+  },
+  "nombre": "Pan Hallulla",
+  "categoria": "Panadería",
+  "stock": 300,
+  "unidadMedida": "Unidades",
+  "caducidad": {
+    "$date": "2025-11-23T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f257e"
+  },
+  "nombre": "Coca Cola Original",
+  "categoria": "Bebidas",
+  "stock": 300,
+  "unidadMedida": "Latas",
+  "caducidad": {
+    "$date": "2026-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f257f"
+  },
+  "nombre": "Sprite",
+  "categoria": "Bebidas",
+  "stock": 200,
+  "unidadMedida": "Latas",
+  "caducidad": {
+    "$date": "2026-11-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2580"
+  },
+  "nombre": "Cerveza Lager",
+  "categoria": "Bebidas",
+  "stock": 150,
+  "unidadMedida": "Botellas",
+  "caducidad": {
+    "$date": "2026-05-21T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692121170533e4f0de3f2581"
+  },
+  "nombre": "Vino Tinto Cabernet",
+  "categoria": "Bebidas",
+  "stock": 60,
+  "unidadMedida": "Botellas",
+  "caducidad": {
+    "$date": "2027-11-21T00:00:00.000Z"
+  }
+}]
