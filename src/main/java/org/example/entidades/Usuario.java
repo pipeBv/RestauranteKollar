@@ -3,7 +3,7 @@ package org.example.entidades;
 public class Usuario extends Entidad{
     private String contraseña;
 
-    public Usuario(int id,String nombre,String contraseña) {
+    public Usuario(Object id,String nombre,String contraseña) {
         super(id, nombre);
         this.contraseña = contraseña;
     }
@@ -11,7 +11,5 @@ public class Usuario extends Entidad{
     public String getContraseña() {
         return contraseña;
     }
-    public String getNombre() {
-        return getNombre();
-    }
+
 }

@@ -1,17 +1,18 @@
 package org.example.entidades;
 
 public class Entidad {
-    private int id;
+    private Object id;
     private String nombre;
 
-    public Entidad(int id, String nombre) {
+    public Entidad(Object id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
-    public int getId() {
+    public Object getId() {
         return id;
     }
     public String getNombre() {
         return nombre;
     }
+
 }

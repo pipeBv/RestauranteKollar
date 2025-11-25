@@ -15,7 +15,7 @@ public class
 ConexionMongoDB {
 
     private static final String CONNECTION_STRING = "mongodb://localhost:27017";
-    private static final String DATABASE_NAME = "RestauranteDB";
+    private static final String DATABASE_NAME = "test";
     private static MongoClient mongoClient = null;
     private static MongoDatabase database = null;
 
