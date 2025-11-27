@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class MermaManager {
     public List<Merma> cargarMerma() {
-        List<Merma> lista = new ArrayList<>();
+        List<Merma> listaMermas = new ArrayList<>();
         MongoDatabase db = ConexionMongoDB.getDatabase();
         MongoCollection<Document> collection = db.getCollection("mermas");
 
@@ -24,11 +24,11 @@ public class MermaManager {
                         fechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
 
                 Merma merma = new Merma(id, nombre, cantidad, motivo, fecha);
-                lista.add(merma);
+                listaMermas.add(merma);
             } catch (Exception e) {
                 System.err.println("Error cargando merma: " + e.getMessage());
             }
         }
-        return lista;
+        return listaMermas;
     }
 }

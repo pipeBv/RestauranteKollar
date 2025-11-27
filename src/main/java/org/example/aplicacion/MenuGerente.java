@@ -3,6 +3,7 @@ package org.example.aplicacion;
 import org.example.entidades.Empleado;
 import org.example.entidades.Ingrediente;
 import org.example.entidades.Plato;
+import org.example.entidades.Presupuesto;
 import org.example.gestion.EmpleadoManager;
 import org.example.gestion.InventarioManager;
 import org.example.gestion.MermaManager;
@@ -19,16 +20,17 @@ public class MenuGerente extends JFrame {
     private PlatoManager platoManager;
     private MermaManager mermaManager;
     private EmpleadoManager empleadoManager;
-
     private DefaultTableModel modeloTablaInventario;
     private DefaultTableModel modeloTablaPlatos;
     private DefaultTableModel modeloTablaPersonal;
+    private Presupuesto presupuesto;
 
-    public MenuGerente(InventarioManager im, PlatoManager pm, MermaManager mm, EmpleadoManager em) {
-        this.inventarioManager = im;
-        this.platoManager = pm;
-        this.mermaManager = mm;
-        this.empleadoManager = em;
+    public MenuGerente(InventarioManager inventarioManager, PlatoManager platoManager, MermaManager mermaManager, EmpleadoManager empleadoManager) {
+        this.inventarioManager = inventarioManager;
+        this.platoManager = platoManager;
+        this.mermaManager = mermaManager;
+        this.empleadoManager = empleadoManager;
+        this.presupuesto = new Presupuesto(10000000,0,0);
 
         cargarInterfazPrincipal();
         cargarDatosTablas();
@@ -62,20 +64,21 @@ public class MenuGerente extends JFrame {
 
     private JPanel crearPanelInventario() {
         JPanel panel = new JPanel(new BorderLayout());
-        String[] col = {"Nombre", "Stock", "Unidad", "Categoría"};
+        String[] col = {"Nombre", "Stock", "Unidad", "Categoría", "Caducidad"};
         modeloTablaInventario = new DefaultTableModel(col, 0);
         JTable tabla = new JTable(modeloTablaInventario);
         panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
         JPanel panelBotones = new JPanel();
-        panelBotones.add(new JButton("Agregar Item"));
-        panel.add(panelBotones, BorderLayout.SOUTH);
+        panelBotones.add(new JButton("Ordenar Compra"));
+        OrdenarCompra ordenarCompra = new OrdenarCompra();
 
+        panel.add(panelBotones, BorderLayout.SOUTH);
         return panel;
     }
 
     private JPanel crearPanelPlatos() {
         JPanel panel = new JPanel(new BorderLayout());
-        String[] col = {"Nombre", "Precio"};
+        String[] col = {"Nombre", "Precio","Descripción", "Ingredientes"};
         modeloTablaPlatos = new DefaultTableModel(col, 0);
         JTable tabla = new JTable(modeloTablaPlatos);
         panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
@@ -84,7 +87,7 @@ public class MenuGerente extends JFrame {
 
     private JPanel crearPanelEmpleados() {
         JPanel panel = new JPanel(new BorderLayout());
-        String[] col = {"ID", "Nombre", "Puesto"};
+        String[] col = {"Nombre", "Rol Empleado"};
         modeloTablaPersonal = new DefaultTableModel(col, 0);
         JTable tabla = new JTable(modeloTablaPersonal);
         panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
@@ -92,7 +95,43 @@ public class MenuGerente extends JFrame {
     }
 
     private JPanel crearPanelPedidos() {
-        return new JPanel();
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0; gbc.gridy = 0;
+        panel.add(new JLabel("Plato:"), gbc);
+        JComboBox<String> comboPlatos = new JComboBox<>();
+        List<Plato> platos = platoManager.cargarPlatos();
+        for (Plato p : platos) {
+            comboPlatos.addItem(p.getNombre());
+        }
+        gbc.gridx = 1;
+        panel.add(comboPlatos, gbc);
+        gbc.gridx = 0; gbc.gridy = 1;
+        panel.add(new JLabel("Cantidad:"), gbc);
+        JSpinner spinnerCantidad = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
+        gbc.gridx = 1;
+        panel.add(spinnerCantidad, gbc);
+        JButton btnConfirmar = new JButton("Realizar " +
+                "Pedido");
+        gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
+        panel.add(btnConfirmar, gbc);
+        btnConfirmar.addActionListener(e -> {
+            String nombrePlato = (String) comboPlatos.getSelectedItem();
+            int cantidad = (int) spinnerCantidad.getValue();
+            Plato platoSeleccionado = platos.stream()
+                    .filter(p -> p.getNombre().equals(nombrePlato))
+                    .findFirst()
+                    .orElse(null);
+            if (platoSeleccionado != null) {
+                HacerPedidoPlato gestorPedidos = new HacerPedidoPlato(inventarioManager, presupuesto);
+                gestorPedidos.realizarPedido(platoSeleccionado, cantidad);
+                cargarDatosTablas();
+            }
+        });
+
+        return panel;
     }
 
     private JPanel crearPanelReporte() {
@@ -104,14 +143,14 @@ public class MenuGerente extends JFrame {
         modeloTablaInventario.setRowCount(0);
         for (Ingrediente ing : ingredientes) {
             modeloTablaInventario.addRow(new Object[]{
-                    ing.getNombre(), ing.getStock(), ing.getUnidadMedida(), ing.getCategoria()
-            });
+                    ing.getNombre(), ing.getStock(), ing.getUnidadMedida(), ing.getCategoria(), ing.getFechaCaducidad()});
         }
 
         List<Plato> platos = platoManager.cargarPlatos();
         modeloTablaPlatos.setRowCount(0);
         for (Plato p : platos) {
-            modeloTablaPlatos.addRow(new Object[]{ p.getNombre(), p.getPrecio() });
+            modeloTablaPlatos.addRow(new Object[]{
+                    p.getNombre(), p.getPrecio(), p.getDescripcion(), p.getListaIngredientes()});
         }
 
 
@@ -119,7 +158,7 @@ public class MenuGerente extends JFrame {
         modeloTablaPersonal.setRowCount(0);
         for (Empleado emp : empleados) {
             modeloTablaPersonal.addRow(new Object[]{
-                    emp.getId(), emp.getNombre(), emp.getRolEmpleado()
+                    emp.getNombre(), emp.getRolEmpleado()
             });
         }
     }

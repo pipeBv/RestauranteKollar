@@ -3,8 +3,8 @@ package org.example.entidades;
 public class Empleado extends Usuario{
     private double sueldo;
     private String rolEmpleado;
-    public Empleado(Object id, String nombre, String contraseña,String rolEmpleado, double sueldo){
-        super(id, nombre, contraseña);
+    public Empleado(Object id, String nombre, String contrasenia,String rolEmpleado, double sueldo){
+        super(id, nombre, contrasenia);
         this.rolEmpleado = rolEmpleado;
         this.sueldo = sueldo;
     }

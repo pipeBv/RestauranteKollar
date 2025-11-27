@@ -1,15 +1,15 @@
 package org.example.entidades;
 
 public class Usuario extends Entidad{
-    private String contraseña;
+    private String contrasenia;
 
-    public Usuario(Object id,String nombre,String contraseña) {
+    public Usuario(Object id,String nombre,String contrasenia) {
         super(id, nombre);
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
 }
