@@ -9,6 +9,7 @@ public class Proveedor {
     private String nombreIngrediente;
     private String categoria;
     private LocalDate fechaCaducidad;
+
     public Proveedor(double precioPorUnidad, double precioPorKilo, double precioPorMayor, String nombreIngrediente, String categoria, LocalDate fechaCaducidad) {
         this.precioPorUnidad = precioPorUnidad;
         this.precioPorKilo = precioPorKilo;
@@ -17,6 +18,7 @@ public class Proveedor {
         this.categoria = categoria;
         this.fechaCaducidad = fechaCaducidad;
     }
+
     public double getPrecioPorUnidad() {
         return precioPorUnidad;
     }

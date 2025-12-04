@@ -1,12 +1,9 @@
-
 package org.example.aplicacion;
-
-
-import org.example.entidades.Ingrediente;
 import org.example.entidades.Plato;
 import org.example.entidades.Presupuesto;
 import org.example.gestion.InventarioManager;
 import org.example.gestion.PlatoManager;
+import org.example.gestion.PresupuestoManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,14 +13,17 @@ import java.util.List;
 public class MenuEmpleado extends JFrame {
     private InventarioManager inventarioManager;
     private PlatoManager platoManager;
+    private PresupuestoManager presupuestoManager;
     private DefaultTableModel modeloTablaPlatos;
-    private DefaultTableModel modeloTablaInventario;
     private Presupuesto presupuesto;
 
     public MenuEmpleado(InventarioManager inventarioManager, PlatoManager platoManager) {
         this.inventarioManager = inventarioManager;
         this.platoManager = platoManager;
-        this.presupuesto = new Presupuesto(10000000,0,0);
+        
+        this.presupuestoManager = new PresupuestoManager();
+        this.presupuesto = presupuestoManager.cargarPresupuesto();
+        
         initUI();
         cargarDatos();
     }
@@ -36,7 +36,6 @@ public class MenuEmpleado extends JFrame {
 
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Ver Platos", crearPanelCarta());
-        tabbedPane.addTab("Ver Inventario", crearPanelInventario());
         tabbedPane.addTab("Hacer Pedido", crearPanelPedidos());
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -62,20 +61,6 @@ public class MenuEmpleado extends JFrame {
             }
         };
         JTable tabla = new JTable(modeloTablaPlatos);
-        panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
-        return panel;
-    }
-
-    private JPanel crearPanelInventario() {
-        JPanel panel = new JPanel(new BorderLayout());
-        String[] col = {"Nombre", "Stock", "Unidad", "Categoría"};
-        modeloTablaInventario = new DefaultTableModel(col, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        JTable tabla = new JTable(modeloTablaInventario);
         panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
         return panel;
     }
@@ -114,9 +99,13 @@ public class MenuEmpleado extends JFrame {
                     .findFirst()
                     .orElse(null);
             if (platoSeleccionado != null) {
-                HacerPedidoPlato hacerPedido = new HacerPedidoPlato(inventarioManager, presupuesto);
+                // Usar constructor nuevo que acepta PresupuestoManager
+                HacerPedidoPlato hacerPedido = new HacerPedidoPlato(inventarioManager, presupuestoManager);
                 hacerPedido.realizarPedido(platoSeleccionado, cantidad);
+                
                 cargarDatos();
+                // Actualizar presupuesto local para mostrarlo
+                this.presupuesto = presupuestoManager.cargarPresupuesto();
                 areaResultado.setText("Último pedido: " + cantidad + "x " + nombrePlato + "\nPresupuesto actual: $" + presupuesto.getPresupuesto());
             }
         });
@@ -128,11 +117,6 @@ public class MenuEmpleado extends JFrame {
         modeloTablaPlatos.setRowCount(0);
         for (Plato p : platos) {
             modeloTablaPlatos.addRow(new Object[]{p.getNombre(), p.getPrecio(), p.getDescripcion(), p.getListaIngredientes()});
-        }
-        List<Ingrediente> ingredientes = inventarioManager.cargarIngredientes();
-        modeloTablaInventario.setRowCount(0);
-        for (Ingrediente ing : ingredientes) {
-            modeloTablaInventario.addRow(new Object[]{ing.getNombre(), ing.getStock(), ing.getUnidadMedida(),ing.getCategoria()});
         }
     }
 }

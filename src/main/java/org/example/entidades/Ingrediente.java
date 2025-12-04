@@ -36,4 +36,9 @@ public class Ingrediente extends Entidad{
         return fechaCaducidad;
     }
 
+    @Override
+    public String toString() {
+        return getNombre();
+    }
+
 }

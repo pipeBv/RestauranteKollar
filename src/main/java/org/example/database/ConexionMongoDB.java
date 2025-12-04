@@ -11,8 +11,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class
-ConexionMongoDB {
+public class ConexionMongoDB {
 
     private static final String CONNECTION_STRING = "mongodb://localhost:27017";
     private static final String DATABASE_NAME = "test";
@@ -34,14 +33,6 @@ ConexionMongoDB {
             }
         }
         return database;
-    }
-    public static void closeConnection() {
-        if (mongoClient != null) {
-            mongoClient.close();
-            mongoClient = null;
-            database = null;
-            System.out.println("Se cerró la conexión con la base de datos");
-        }
     }
 }
 

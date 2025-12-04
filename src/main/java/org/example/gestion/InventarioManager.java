@@ -5,12 +5,21 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.example.database.ConexionMongoDB;
 import org.example.entidades.Ingrediente;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventarioManager {
+
+
+    public void actualizarStock(String nombreIngrediente, double cambioStock) {
+        MongoDatabase db = ConexionMongoDB.getDatabase();
+        MongoCollection<Document> collection = db.getCollection("ingredientes");
+        collection.updateOne(
+            new Document("nombre", nombreIngrediente), 
+            new Document("$inc", new Document("stock", cambioStock))
+        );
+    }
 
     public List<Ingrediente> cargarIngredientes() {
         List<Ingrediente> lista = new ArrayList<>();
@@ -64,7 +73,7 @@ public class InventarioManager {
                     if (ingInventario.getNombre().equalsIgnoreCase(ingReceta.getNombre())) {
                         double cantidadADescontar = ingReceta.getStock() * cantidadPlatos;
                         ingInventario.setStock(ingInventario.getStock() - cantidadADescontar);
-                        //ingredienteRepository.actualizar(ingInventario);
+                        actualizarStock(ingInventario.getNombre(), -cantidadADescontar);
                         break;
                     }
                 }
