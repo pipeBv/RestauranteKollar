@@ -4,6 +4,9 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.example.database.ConexionMongoDB;
 import org.example.entidades.Empleado;
+import org.example.entidades.Gerente;
+
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,38 +15,76 @@ public class EmpleadoManager {
         List<Empleado> lista = new ArrayList<>();
         MongoDatabase db = ConexionMongoDB.getDatabase();
         MongoCollection<Document> collection = db.getCollection("empleados");
-        System.out.println("Cargando empleados...");
+
         for (Document doc : collection.find()) {
             try {
-                System.out.println("Documento crudo: " + doc.toJson());
                 Object idObj = doc.get("_id");
                 int id = (idObj != null) ? idObj.hashCode() : 0;
-
                 String nombre = doc.getString("nombre");
-                String rolEmpleado = doc.getString("rolEmpleado");
+                String rol = doc.getString("rolEmpleado");
+                String pass = doc.getString("contraseña");
+                if (pass == null) pass = "";
 
-                String contraseña = doc.getString("contraseña");
-                if (contraseña == null) {
-                    System.out.println("AVISO: El campo 'contraseña' es nulo para " + nombre);
-                    contraseña = "";
-                }
+                Double sueldo = doc.getDouble("sueldo");
+                double sueldoVal = (sueldo != null) ? sueldo : 0.0;
 
-                double sueldo = 0.0;
-
-                if (doc.containsKey("sueldo")) {
-                    sueldo = doc.getDouble("sueldo");
-                }
-
-                Empleado emp = new Empleado(id, nombre, contraseña, rolEmpleado, sueldo);
-                lista.add(emp);
-                System.out.println("Empleado cargado: " + nombre); // Confirmación
-
+                lista.add(new Empleado(id, nombre, pass, rol, sueldoVal));
             } catch (Exception e) {
-                System.err.println("Error cargando un empleado específico: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error cargando un empleado específico: " + e.getMessage());
                 e.printStackTrace();
             }
         }
-        System.out.println("Total empleados cargados: " + lista.size());
         return lista;
+    }
+
+    public List<Gerente> cargarGerentes() {
+        List<Gerente> lista = new ArrayList<>();
+        MongoDatabase db = ConexionMongoDB.getDatabase();
+        MongoCollection<Document> collection = db.getCollection("gerentes");
+
+        for (Document doc : collection.find()) {
+            try {
+                Object idObj = doc.get("_id");
+                int id = (idObj != null) ? idObj.hashCode() : 0;
+                String nombre = doc.getString("nombre");
+                String pass = doc.getString("contraseña");
+
+                lista.add(new Gerente(id, nombre, pass));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error cargando gerente: " + e.getMessage());
+            }
+        }
+        return lista;
+    }
+
+    public void agregarEmpleado(String nombre, String rol, String password, double sueldo) {
+        if (sueldo < 0) {
+            JOptionPane.showMessageDialog(null, "Error: El sueldo no puede ser negativo.");
+            return;
+        }
+        MongoDatabase db = ConexionMongoDB.getDatabase();
+        MongoCollection<Document> collection = db.getCollection("empleados");
+        Document doc = new Document("nombre", nombre)
+                .append("rolEmpleado", rol)
+                .append("contraseña", password)
+                .append("sueldo", sueldo);
+        collection.insertOne(doc);
+    }
+
+    public void eliminarEmpleado(String nombre) {
+        MongoDatabase db = ConexionMongoDB.getDatabase();
+        MongoCollection<Document> collection = db.getCollection("empleados");
+        collection.deleteOne(new Document("nombre", nombre));
+    }
+
+    public void modificarEmpleado(String nombreOriginal, String nuevoRol, double nuevoSueldo) {
+        if (nuevoSueldo < 0) {
+            JOptionPane.showMessageDialog(null, "Error: El sueldo no puede ser negativo.");
+            return;
+        }
+        MongoDatabase db = ConexionMongoDB.getDatabase();
+        MongoCollection<Document> collection = db.getCollection("empleados");
+        collection.updateOne(new Document("nombre", nombreOriginal),
+                new Document("$set", new Document("rolEmpleado", nuevoRol).append("sueldo", nuevoSueldo)));
     }
 }

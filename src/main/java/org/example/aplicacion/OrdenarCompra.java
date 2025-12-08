@@ -5,8 +5,10 @@ import org.example.entidades.Presupuesto;
 import org.example.entidades.Proveedor;
 import org.example.gestion.InventarioManager;
 import org.example.gestion.PresupuestoManager; // Nuevo import
-import org.example.gestion.ProveedorManager;   // Nuevo import
-
+import org.example.gestion.ProveedorManager;
+import org.example.entidades.Compra;
+import org.example.gestion.ComprasManager;
+import java.time.LocalDate;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -113,16 +115,22 @@ public class OrdenarCompra extends JFrame {
 
         double costoTotal = 0;
         switch (tipoCompra) {
-            case "Unidad": costoTotal = proveedor.getPrecioPorUnidad() * cantidad; break;
-            case "Kilo":   costoTotal = proveedor.getPrecioPorKilo() * cantidad; break;
-            case "Mayor":  costoTotal = proveedor.getPrecioPorMayor() * cantidad; break;
+            case "Unidad":
+                costoTotal = proveedor.getPrecioPorUnidad() * cantidad;
+                break;
+            case "Kilo":
+                costoTotal = proveedor.getPrecioPorKilo() * cantidad;
+                break;
+            case "Mayor":
+                costoTotal = proveedor.getPrecioPorMayor() * cantidad;
+                break;
         }
 
         if (presupuesto.getPresupuesto() < costoTotal) {
-             JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     "Fondos insuficientes.\nCosto: $" + costoTotal + "\nPresupuesto: $" + presupuesto.getPresupuesto(),
                     "Error de Compra", JOptionPane.ERROR_MESSAGE);
-             return;
+            return;
         }
 
         int confirm = JOptionPane.showConfirmDialog(this,
@@ -133,16 +141,22 @@ public class OrdenarCompra extends JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
 
             presupuesto.setPresupuesto(presupuesto.getPresupuesto() - costoTotal);
-            
-            // 2. Actualizar en Base de Datos (resta presupuesto, no afecta ganancias/perdidas directamente o quizás perdidas?)
-            // Asumiremos que comprar es gasto, tal vez quieras sumarlo a 'perdidas' o solo restar presupuesto.
-            // Aquí restamos presupuesto y no tocamos ganancias/perdidas
             presupuestoManager.actualizarPresupuesto(-costoTotal, 0, 0);
 
             actualizarStockInventario(proveedor.getNombreIngrediente(), cantidad, tipoCompra);
 
+            ComprasManager comprasManager = new ComprasManager();
+            Compra nuevaCompra = new Compra(
+                    proveedor.getNombreIngrediente(),
+                    cantidad,
+                    tipoCompra,
+                    costoTotal,
+                    LocalDate.now()
+            );
+            comprasManager.registrarCompra(nuevaCompra);
+
             actualizarLabelPresupuesto();
-            JOptionPane.showMessageDialog(this, "Compra realizada con éxito.");
+            JOptionPane.showMessageDialog(this, "Compra realizada y registrada con éxito.");
         }
     }
 
@@ -173,7 +187,4 @@ public class OrdenarCompra extends JFrame {
         lblPresupuestoActual.setText("Presupuesto: $" + String.format("%.2f", presupuesto.getPresupuesto()));
     }
 
-    public JPanel getPanelOrdenarCompra() {
-        return panelPrincipal;
-    }
 }

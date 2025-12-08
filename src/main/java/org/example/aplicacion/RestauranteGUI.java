@@ -1,23 +1,21 @@
 package org.example.aplicacion;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import org.example.entidades.Gerente;
 import org.example.entidades.Empleado;
-import org.example.gestion.*; 
+import org.example.gestion.*;
 
 
 public class RestauranteGUI extends JFrame {
-    
+
     private JPanel mainPanel;
     private JTextField userField;
     private JPasswordField passwordField;
     private JButton loginButton;
-    
+
     private EmpleadoManager empleadoManager;
     private InventarioManager inventarioManager;
     private PlatoManager platoManager;
@@ -44,6 +42,8 @@ public class RestauranteGUI extends JFrame {
         JLabel passLabel = new JLabel("Contraseña: ");
         passwordField = new JPasswordField();
         loginButton = new JButton("Iniciar Sesión");
+        passwordField.addActionListener(e -> loginButton.doClick());
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,57 +63,48 @@ public class RestauranteGUI extends JFrame {
     }
 
     private void verificarUsuario(String nombreUsuario, String contraseña) {
+
         List<Gerente> gerentes = empleadoManager.cargarGerentes();
         for (Gerente g : gerentes) {
             if (g.getNombre().equals(nombreUsuario)) {
-                if(g.getContrasenia().equals(contraseña)){
-                    JOptionPane.showMessageDialog(this, "Bienvenido Gerente: "+ g.getNombre());
+                if (g.getContrasenia().equals(contraseña)) {
+                    JOptionPane.showMessageDialog(this, "Bienvenido Gerente: " + g.getNombre());
                     MenuGerente menuGerente = new MenuGerente(inventarioManager, platoManager, mermaManager, empleadoManager);
                     menuGerente.setVisible(true);
                     this.dispose();
                     return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
+                    return;
                 }
-                else{
-                JOptionPane.showMessageDialog(this,"Contraseña incorrecta");
-                }
-            }
-            else{
-                JOptionPane.showMessageDialog(this,"Usuario no encontrado");
             }
         }
 
         List<Empleado> empleados = empleadoManager.cargarEmpleados();
-
         for (Empleado emp : empleados) {
             if (emp.getNombre().equals(nombreUsuario)) {
-
                 if (emp.getContrasenia().equals(contraseña)) {
                     if (emp.getRolEmpleado().equals("Cajero")) {
-                        JOptionPane.showMessageDialog(this, "Bienvenido Cajero: "+ emp.getNombre());
+                        JOptionPane.showMessageDialog(this, "Bienvenido Cajero: " + emp.getNombre());
                         MenuEmpleado menuEmpleado = new MenuEmpleado(inventarioManager, platoManager);
                         menuEmpleado.setVisible(true);
                         this.dispose();
                         return;
                     } else {
-                        JOptionPane.showMessageDialog(this, 
-                            "No puedes ingresar porque no eres cajero.",
-                            "Acceso Denegado", 
-                            JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this,
+                                "No puedes ingresar porque no eres cajero (Rol: " + emp.getRolEmpleado() + ")",
+                                "Acceso Denegado",
+                                JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
                     return;
                 }
             }
-            else if(emp.getNombre().equalsIgnoreCase(nombreUsuario)){
-                JOptionPane.showMessageDialog(this, "Usuario no encontrado");
-                return;
-            }
-
         }
 
 
+        JOptionPane.showMessageDialog(this, "Usuario no encontrado");
     }
 }

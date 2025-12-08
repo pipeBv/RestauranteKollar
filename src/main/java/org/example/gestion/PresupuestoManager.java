@@ -1,5 +1,4 @@
 package org.example.gestion;
-
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -29,7 +28,7 @@ public class PresupuestoManager {
         MongoCollection<Document> collection = db.getCollection("presupuesto");
 
         collection.deleteMany(new Document());
-        
+
         Document doc = new Document("presupuesto", presupuesto.getPresupuesto())
                 .append("perdidas", presupuesto.getPerdidas())
                 .append("ganancias", presupuesto.getGanancias());

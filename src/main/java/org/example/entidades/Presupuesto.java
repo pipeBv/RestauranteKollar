@@ -14,15 +14,12 @@ public class Presupuesto {
     public double getPresupuesto() {
         return presupuesto;
     }
-
     public void setPresupuesto(double presupuesto) {
         this.presupuesto = presupuesto;
     }
-
     public double getGanancias() {
         return ganancias;
     }
-
     public double getPerdidas() {
         return perdidas;
     }

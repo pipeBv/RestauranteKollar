@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Plato extends Entidad{
-private List<Ingrediente> listaIngredientes;
-private double precio;
-private String descripcion;
+    private List<Ingrediente> listaIngredientes;
+    private double precio;
+    private String descripcion;
 
     public Plato(Object id, String nombre, double precio, String descripcion, List<Ingrediente> listaIngredientes) {
         super(id, nombre);

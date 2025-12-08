@@ -4,7 +4,6 @@ import org.example.entidades.Presupuesto;
 import org.example.gestion.InventarioManager;
 import org.example.gestion.PlatoManager;
 import org.example.gestion.PresupuestoManager;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -20,15 +19,12 @@ public class MenuEmpleado extends JFrame {
     public MenuEmpleado(InventarioManager inventarioManager, PlatoManager platoManager) {
         this.inventarioManager = inventarioManager;
         this.platoManager = platoManager;
-        
         this.presupuestoManager = new PresupuestoManager();
         this.presupuesto = presupuestoManager.cargarPresupuesto();
-        
-        initUI();
+        iniciarInterfaz();
         cargarDatos();
     }
-
-    private void initUI() {
+    private void iniciarInterfaz() {
         setTitle("Menú Empleado - Restaurante Kollar");
         setSize(900, 600);
         setLocationRelativeTo(null);
@@ -37,17 +33,14 @@ public class MenuEmpleado extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Ver Platos", crearPanelCarta());
         tabbedPane.addTab("Hacer Pedido", crearPanelPedidos());
-
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
-
         JButton btnLogout = new JButton("Cerrar Sesión");
         btnLogout.addActionListener(e -> {
             new RestauranteGUI().setVisible(true);
             dispose();
         });
         mainPanel.add(btnLogout, BorderLayout.SOUTH);
-
         setContentPane(mainPanel);
     }
 
@@ -94,22 +87,22 @@ public class MenuEmpleado extends JFrame {
         btnHacerPedido.addActionListener(e -> {
             String nombrePlato = (String) comboPlatos.getSelectedItem();
             int cantidad = (int) spinnerCantidad.getValue();
-            Plato platoSeleccionado = platos.stream()
-                    .filter(p -> p.getNombre().equals(nombrePlato))
-                    .findFirst()
-                    .orElse(null);
+            Plato platoSeleccionado = platos.stream().filter(p -> p.getNombre().equals(nombrePlato)).findFirst().orElse(null);
             if (platoSeleccionado != null) {
-                // Usar constructor nuevo que acepta PresupuestoManager
                 HacerPedidoPlato hacerPedido = new HacerPedidoPlato(inventarioManager, presupuestoManager);
-                hacerPedido.realizarPedido(platoSeleccionado, cantidad);
-                
-                cargarDatos();
-                // Actualizar presupuesto local para mostrarlo
-                this.presupuesto = presupuestoManager.cargarPresupuesto();
-                areaResultado.setText("Último pedido: " + cantidad + "x " + nombrePlato + "\nPresupuesto actual: $" + presupuesto.getPresupuesto());
+                boolean compraExitosa = hacerPedido.realizarPedido(platoSeleccionado, cantidad);
+                if (compraExitosa) {
+                    cargarDatos();
+                    this.presupuesto = presupuestoManager.cargarPresupuesto();
+                    areaResultado.setText(" Última Venta \n" +
+                            "Plato: " + nombrePlato + " (x" + cantidad + ")\n" +
+                            "Total cobrado: $" + (platoSeleccionado.getPrecio() * cantidad) + "\n" +
+                            "Dinero en Caja: $" + presupuesto.getPresupuesto());
+                } else {
+                    areaResultado.setText("Error en el pedido: Stock insuficiente.");
+                }
             }
         });
-
         return panel;
     }
     private void cargarDatos() {

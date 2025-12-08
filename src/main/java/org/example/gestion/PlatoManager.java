@@ -1,16 +1,29 @@
 package org.example.gestion;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.example.database.ConexionMongoDB;
 import org.example.entidades.Ingrediente;
 import org.example.entidades.Plato;
-import java.time.ZoneId;
+import org.example.aplicacion.Gestionable;
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlatoManager {
-    public List<Plato> cargarPlatos() {
+
+public class PlatoManager implements Gestionable<Plato> {
+
+    @Override
+    public List<Plato> cargarTodos() {
+        return cargarPlatosLogica();
+    }
+
+
+
+
+
+    public List<Plato> cargarPlatosLogica() {
         List<Plato> lista = new ArrayList<>();
         MongoDatabase db = ConexionMongoDB.getDatabase();
         MongoCollection<Document> collection = db.getCollection("platos");
@@ -28,41 +41,44 @@ public class PlatoManager {
                 if (listaDocsIngredientes != null) {
                     for (Document ingDoc : listaDocsIngredientes) {
                         String iNombre = ingDoc.getString("nombre");
-                        
-                        Number iStockNum = ingDoc.get("stock", Number.class);
-                        double iStock = (iStockNum != null) ? iStockNum.doubleValue() : 0.0;
-                        
-                        String iUnidad = ingDoc.getString("unidadMedida");
-                        String iCategoria = ingDoc.getString("categoria");
-                        
-                        java.util.Date iFechaDate = ingDoc.getDate("fechaCaducidad");
-                        if (iFechaDate == null) {
-                            iFechaDate = ingDoc.getDate("caducidad");
-                        }
-
-                        java.time.LocalDate iFecha = (iFechaDate != null) ?
-                                iFechaDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
-
-                        listaIngredientes.add(new Ingrediente(0, iNombre, iStock, iUnidad, iCategoria, iFecha));
+                        Number iCantidadNum = ingDoc.get("cantidad", Number.class);
+                        if (iCantidadNum == null) iCantidadNum = ingDoc.get("stock", Number.class);
+                        double iCantidad = (iCantidadNum != null) ? iCantidadNum.doubleValue() : 0.0;
+                        listaIngredientes.add(new Ingrediente(0, iNombre, iCantidad, "Unidad", "Receta", null));
                     }
                 }
-
-                Plato plato = new Plato(id, nombre, precio, descripcion, listaIngredientes);
-                lista.add(plato);
+                lista.add(new Plato(id, nombre, precio, descripcion, listaIngredientes));
             } catch (Exception e) {
-                System.err.println("Error cargando plato '" + doc.getString("nombre") + "': " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             }
         }
         return lista;
     }
 
-    public void agregarPlato(String nombre, double precio, String descripcion) {
+    public List<Plato> cargarPlatos() {
+        return cargarTodos();
+    }
+
+    public void agregarPlato(String nombre, double precio, String descripcion, List<Ingrediente> ingredientes) {
+        if (precio < 0) {
+            JOptionPane.showMessageDialog(null, "Error: El precio no puede ser negativo.");
+            return;
+        }
+
         MongoDatabase db = ConexionMongoDB.getDatabase();
         MongoCollection<Document> collection = db.getCollection("platos");
+
+        List<Document> listaDocsIngredientes = new ArrayList<>();
+        for (Ingrediente ing : ingredientes) {
+            listaDocsIngredientes.add(new Document("nombre", ing.getNombre())
+                    .append("cantidad", ing.getStock()));
+        }
+
         Document doc = new Document("nombre", nombre)
                 .append("precio", precio)
                 .append("descripcion", descripcion)
-                .append("listaIngredientes", new ArrayList<>());
+                .append("listaIngredientes", listaDocsIngredientes);
+
         collection.insertOne(doc);
     }
 
@@ -73,6 +89,10 @@ public class PlatoManager {
     }
 
     public void modificarPlato(String nombreOriginal, double nuevoPrecio, String nuevaDescripcion) {
+        if (nuevoPrecio < 0) {
+            JOptionPane.showMessageDialog(null, "Error: El precio no puede ser negativo.");
+            return;
+        }
         MongoDatabase db = ConexionMongoDB.getDatabase();
         MongoCollection<Document> collection = db.getCollection("platos");
         collection.updateOne(new Document("nombre", nombreOriginal),

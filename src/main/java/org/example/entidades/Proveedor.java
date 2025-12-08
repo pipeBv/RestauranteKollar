@@ -18,7 +18,6 @@ public class Proveedor {
         this.categoria = categoria;
         this.fechaCaducidad = fechaCaducidad;
     }
-
     public double getPrecioPorUnidad() {
         return precioPorUnidad;
     }
@@ -37,4 +36,5 @@ public class Proveedor {
     public LocalDate getFechaCaducidad() {
         return fechaCaducidad;
     }
+
 }

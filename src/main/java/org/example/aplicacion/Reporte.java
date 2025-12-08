@@ -1,137 +1,183 @@
 package org.example.aplicacion;
-
+import org.example.entidades.Compra;
 import org.example.entidades.Ingrediente;
 import org.example.entidades.Merma;
 import org.example.entidades.Plato;
-import org.example.entidades.Presupuesto; // Importar
-import org.example.gestion.InventarioManager;
-import org.example.gestion.MermaManager;
-import org.example.gestion.PlatoManager;
-import org.example.gestion.PresupuestoManager; // Importar
-
+import org.example.entidades.Presupuesto;
+import org.example.gestion.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.text.DecimalFormat;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Reporte extends JFrame {
-    private JTextArea areaReporte;
+
+
     private InventarioManager inventarioManager;
     private PlatoManager platoManager;
     private MermaManager mermaManager;
-    private PresupuestoManager presupuestoManager; // Nuevo
+    private PresupuestoManager presupuestoManager;
+    private VentasManager ventasManager;
+    private ComprasManager comprasManager;
 
-    private Presupuesto presupuestoData; // Guardar objeto presupuesto
-    private List<Plato> platosVendidos;
+    private JLabel lblPresupuestoVal;
+    private JLabel lblGananciasVal;
+    private JLabel lblPerdidasVal;
+    private JLabel lblGastosVal;
 
-    public Reporte(InventarioManager inventarioManager, PlatoManager platoManager, MermaManager mermaManager, List<Plato> platosVendidos) {
+    private DefaultTableModel modeloVentas;
+    private DefaultTableModel modeloCompras;
+    private DefaultTableModel modeloAlertas;
+    private DefaultTableModel modeloMermas;
+
+    private DecimalFormat df = new DecimalFormat("$ #,##0.00");
+
+    public Reporte(InventarioManager inventarioManager, PlatoManager platoManager, MermaManager mermaManager, List<Plato> platosVendidosIniciales) {
         this.inventarioManager = inventarioManager;
         this.platoManager = platoManager;
         this.mermaManager = mermaManager;
-        this.platosVendidos = platosVendidos;
-        this.presupuestoManager = new PresupuestoManager(); // Inicializar
+        this.presupuestoManager = new PresupuestoManager();
+        this.ventasManager = new VentasManager();
+        this.comprasManager = new ComprasManager();
 
-        setTitle("Reporte General del Restaurante");
-        setSize(600, 700);
+        initUI();
+        cargarDatos();
+    }
+
+    private void initUI() {
+        setTitle("Reporte Gerencial - Restaurante Kollar");
+        setSize(950, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10));
 
-        inicializarComponentes();
-        generarDatosReporte();
+        JPanel panelResumen = new JPanel(new GridLayout(1, 4, 10, 0));
+        panelResumen.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        panelResumen.add(crearTarjeta("Dinero en Caja", Color.decode("#27AE60")));
+        panelResumen.add(crearTarjeta("Ventas Totales", Color.decode("#2980B9")));
+        panelResumen.add(crearTarjeta("Gastos (Compras)", Color.decode("#E67E22")));
+        panelResumen.add(crearTarjeta("Pérdidas (Mermas)", Color.decode("#C0392B")));
+
+        lblPresupuestoVal = (JLabel) ((JPanel) panelResumen.getComponent(0)).getComponent(1);
+        lblGananciasVal   = (JLabel) ((JPanel) panelResumen.getComponent(1)).getComponent(1);
+        lblGastosVal      = (JLabel) ((JPanel) panelResumen.getComponent(2)).getComponent(1);
+        lblPerdidasVal    = (JLabel) ((JPanel) panelResumen.getComponent(3)).getComponent(1);
+
+        add(panelResumen, BorderLayout.NORTH);
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setFont(new Font("Arial", Font.BOLD, 14));
+
+        modeloVentas = new DefaultTableModel(new String[]{"Plato Vendido", "Precio Venta"}, 0);
+        tabbedPane.addTab("Historial Ventas", new JScrollPane(new JTable(modeloVentas)));
+
+        modeloCompras = new DefaultTableModel(new String[]{"Ingrediente", "Cantidad", "Tipo", "Fecha", "Costo Total"}, 0);
+        tabbedPane.addTab("Historial Compras", new JScrollPane(new JTable(modeloCompras)));
+
+        modeloAlertas = new DefaultTableModel(new String[]{"Ingrediente", "Stock Actual", "Estado"}, 0);
+        JTable tablaAlertas = new JTable(modeloAlertas);
+        tablaAlertas.setForeground(Color.RED);
+        tabbedPane.addTab("Alertas Stock", new JScrollPane(tablaAlertas));
+
+        modeloMermas = new DefaultTableModel(new String[]{"Ingrediente", "Cantidad", "Motivo", "Fecha"}, 0);
+        JTable tablaMermas = new JTable(modeloMermas);
+        tablaMermas.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tabbedPane.addTab("Mermas Registradas", new JScrollPane(tablaMermas));
+
+        add(tabbedPane, BorderLayout.CENTER);
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton btnActualizar = new JButton("Actualizar Datos");
+        btnActualizar.addActionListener(e -> cargarDatos());
+        JButton btnCerrar = new JButton("Cerrar");
+        btnCerrar.addActionListener(e -> dispose());
+
+        panelBotones.add(btnActualizar);
+        panelBotones.add(btnCerrar);
+        add(panelBotones, BorderLayout.SOUTH);
     }
 
-    private void inicializarComponentes() {
-        JPanel panelPrincipal = new JPanel(new BorderLayout());
+    private JPanel crearTarjeta(String titulo, Color colorTexto) {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY, 1),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
+        panel.setBackground(Color.WHITE);
 
-        JLabel titulo = new JLabel("Reporte de Estado y Finanzas", SwingConstants.CENTER);
-        titulo.setFont(new Font("Arial", Font.BOLD, 20));
-        titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JLabel lblTitulo = new JLabel(titulo, SwingConstants.CENTER);
+        lblTitulo.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblTitulo.setForeground(Color.DARK_GRAY);
 
-        areaReporte = new JTextArea();
-        areaReporte.setEditable(false);
-        areaReporte.setFont(new Font("Monospaced", Font.PLAIN, 14));
-        areaReporte.setMargin(new Insets(10, 10, 10, 10));
+        JLabel lblValor = new JLabel("$ 0.00", SwingConstants.CENTER);
+        lblValor.setFont(new Font("Arial", Font.BOLD, 20));
+        lblValor.setForeground(colorTexto);
 
-        JScrollPane scrollPane = new JScrollPane(areaReporte);
-
-        JButton btnCerrar = new JButton("Cerrar Reporte");
-        btnCerrar.addActionListener(e -> this.dispose());
-
-        panelPrincipal.add(titulo, BorderLayout.NORTH);
-        panelPrincipal.add(scrollPane, BorderLayout.CENTER);
-        panelPrincipal.add(btnCerrar, BorderLayout.SOUTH);
-        add(panelPrincipal);
+        panel.add(lblTitulo, BorderLayout.NORTH);
+        panel.add(lblValor, BorderLayout.CENTER);
+        return panel;
     }
 
-    private void generarDatosReporte() {
-        StringBuilder reporte = new StringBuilder();
+    private void cargarDatos() {
+        Presupuesto presupuestoData = presupuestoManager.cargarPresupuesto();
+        List<Compra> listaCompras = comprasManager.cargarCompras();
 
-        // Cargar presupuesto real de la BD
-        this.presupuestoData = presupuestoManager.cargarPresupuesto();
-
-        reporte.append("====== REPORTE GENERAL ======\n\n");
-        reporte.append("--- ESTADO FINANCIERO ---\n");
-        reporte.append(String.format("Presupuesto Actual: $%.2f\n", presupuestoData.getPresupuesto()));
-        reporte.append(String.format("Ganancias Totales: $%.2f\n", presupuestoData.getGanancias()));
-        reporte.append(String.format("Pérdidas Totales: $%.2f\n", presupuestoData.getPerdidas()));
-        reporte.append("\n");
-
-        if (presupuestoData.getPerdidas() > presupuestoData.getGanancias()) {
-            reporte.append("ALERTA: ESTAMOS TENIENDO MUCHAS PÉRDIDAS\n");
-            reporte.append("Revisar gestión de inventario y mermas urgentemente\n");
+        double totalGastadoCompras = 0;
+        for (Compra c : listaCompras) {
+            totalGastadoCompras += c.getTotalGastado();
         }
-        reporte.append("\n");
 
-        reporte.append("--- MERMAS ---\n");
-        List<Merma> listaMermas = mermaManager.cargarMermas();
-        if (listaMermas.isEmpty()) {
-            reporte.append("No hay mermas registradas\n");
-        } else {
-            for (Merma m : listaMermas) {
-                reporte.append(String.format("- %s (Motivo: %s) - Cantidad: %.2f\n",
-                    m.getIngrediente().getNombre(), m.getMotivo(), m.getCantidad()));
-            }
-        }
-        if (listaMermas.size() > 10) {
-            reporte.append("ALERTA: Se están registrando muchas incidencias de merma\n");
-        }
-        reporte.append("\n");
+        lblPresupuestoVal.setText(df.format(presupuestoData.getPresupuesto()));
+        lblGananciasVal.setText(df.format(presupuestoData.getGanancias()));
+        lblPerdidasVal.setText(df.format(presupuestoData.getPerdidas()));
+        lblGastosVal.setText(df.format(totalGastadoCompras));
 
-        reporte.append("--- INGREDIENTES (STOCK) ---\n");
+        modeloVentas.setRowCount(0);
+        List<Plato> ventas = ventasManager.cargarVentasReporte();
+        for (int i = ventas.size() - 1; i >= 0; i--) {
+            Plato p = ventas.get(i);
+            modeloVentas.addRow(new Object[]{p.getNombre(), df.format(p.getPrecio())});
+        }
+
+        modeloCompras.setRowCount(0);
+        for (int i = listaCompras.size() - 1; i >= 0; i--) {
+            Compra c = listaCompras.get(i);
+            modeloCompras.addRow(new Object[]{
+                    c.getIngrediente(), c.getCantidad(), c.getTipoCompra(), c.getFecha(), df.format(c.getTotalGastado())
+            });
+        }
+
+        modeloAlertas.setRowCount(0);
         List<Ingrediente> inventario = inventarioManager.cargarIngredientes();
+        boolean todoOk = true;
         for (Ingrediente ing : inventario) {
-            reporte.append(String.format("%s: %.2f %s\n", ing.getNombre(), ing.getStock(), ing.getUnidadMedida()));
-        }
-        reporte.append("\n");
-
-
-        reporte.append("--- DISPONIBILIDAD DE PLATOS ---\n");
-
-        List<Plato> menu = platoManager.cargarPlatos();
-        boolean faltanIngredientesGeneral = false;
-
-        for (Plato plato : menu) {
-            if (inventarioManager.verificarStock(plato.getListaIngredientes(), 1)) {
-                reporte.append("[DISPONIBLE] ").append(plato.getNombre()).append("\n");
-            } else {
-                reporte.append("(NO DISPONIBLE) ").append(plato.getNombre()).append(" - ");
-                reporte.append("Faltan ingredientes\n");
-                faltanIngredientesGeneral = true;
+            if (ing.getStock() < 10.0) {
+                modeloAlertas.addRow(new Object[]{ing.getNombre(), ing.getStock() + " " + ing.getUnidadMedida(), "CRÍTICO: STOCK BAJO"});
+                todoOk = false;
             }
         }
-        if (faltanIngredientesGeneral) {
-            reporte.append("AVISO: Faltan ingredientes para completar el menú\n");
+        if (todoOk) modeloAlertas.addRow(new Object[]{"-", "-", "Inventario Óptimo"});
+
+        modeloMermas.setRowCount(0);
+        List<Merma> mermasTodas = mermaManager.cargarMermas();
+
+        List<Merma> mermasValidas = mermasTodas.stream()
+                .filter(m -> m.getIngrediente() != null &&
+                        m.getIngrediente().getNombre() != null &&
+                        !m.getIngrediente().getNombre().trim().isEmpty())
+                .sorted(Comparator.comparing(Merma::getFecha).reversed())
+                .collect(Collectors.toList());
+
+        for (Merma m : mermasValidas) {
+            modeloMermas.addRow(new Object[]{
+                    m.getIngrediente().getNombre(),
+                    m.getCantidad(),
+                    m.getMotivo(),
+                    m.getFecha()
+            });
         }
-        reporte.append("\n");
-        reporte.append("--- VENTAS SESIÓN ACTUAL (Info) ---\n");
-        if (platosVendidos == null || platosVendidos.isEmpty()) {
-            reporte.append("No se han registrado ventas en esta consulta.\n");
-        } else {
-            for (Plato p : platosVendidos) {
-                reporte.append(" + ").append(p.getNombre()).append(" - $").append(p.getPrecio()).append("\n");
-            }
-            reporte.append(String.format("Total Platos Listados: %d\n", platosVendidos.size()));
-        }
-        areaReporte.setText(reporte.toString());
     }
-
 }

@@ -8,6 +8,8 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
+import javax.swing.JOptionPane;
+
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -26,9 +28,9 @@ public class ConexionMongoDB {
                 MongoClientSettings settings = MongoClientSettings.builder().applyConnectionString(new ConnectionString(CONNECTION_STRING)).codecRegistry(customCodecRegistry).build();
                 mongoClient = MongoClients.create(settings);
                 database = mongoClient.getDatabase(DATABASE_NAME);
-                System.out.println("Conectado a la base de datos");
+                JOptionPane.showMessageDialog(null, "Conectado a la base de datos");
             } catch (Exception e) {
-                System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos: " + e.getMessage());
                 database = null;
             }
         }
