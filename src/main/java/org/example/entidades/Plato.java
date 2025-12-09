@@ -16,14 +16,12 @@ public class Plato extends Entidad{
     public List<Ingrediente> getListaIngredientes() {
         return listaIngredientes;
     }
-
     public double getPrecio() {
         return precio;
     }
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setPrecio(double precio) {
         this.precio = precio;
     }
