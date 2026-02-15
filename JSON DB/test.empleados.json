@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f2587"
+  },
+  "nombre": "Benjamin Kollar",
+  "contraseña": "admin",
+  "rolEmpleado": "Gerente"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f2588"
+  },
+  "nombre": "Maximiliano Miranda",
+  "contraseña": "maxi",
+  "rolEmpleado": "Cocinero"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f2589"
+  },
+  "nombre": "Felipe Contreras",
+  "contraseña": "pipe",
+  "rolEmpleado": "Cocinero"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f258a"
+  },
+  "nombre": "Francisco Ramirez",
+  "contraseña": "chef2",
+  "rolEmpleado": "Mesero"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f258b"
+  },
+  "nombre": "Juan Perez",
+  "contraseña": "meseroA",
+  "rolEmpleado": "Mesero"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f258c"
+  },
+  "nombre": "Maria Lopez",
+  "contraseña": "meseroB",
+  "rolEmpleado": "Mesero"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f258d"
+  },
+  "nombre": "Carlos Barra",
+  "contraseña": "meseroC",
+  "rolEmpleado": "Mesero"
+},
+{
+  "_id": {
+    "$oid": "692126d60533e4f0de3f258e"
+  },
+  "nombre": "Ana Venta",
+  "contraseña": "cajero",
+  "rolEmpleado": "Cajero"
+}]
